@@ -11,36 +11,12 @@ $escritura =new EscrituraClassProyecto();
 		
 
 	$datosproyecto = $escritura->DatosProyecto($numeroProyecto);
-	/* Para leer los datos del proyecto
-	proy_id 		= 0
-	proy_nombre 	= 1
-	not_id 			= 2
-	num_protocolo 	= 3
-	observaciones 	= 4
-	estado 			= 5
-	*/
-	#$codigoEscritura = $_REQUEST['codigoEscritura'];
-	#$codigoEscritura = 336665;
-	#echo "El codigo enviado es: ".$codigoEscritura;
-
+	
 	$valor1 = $escritura->Escrituras($numeroProyecto);
-	#$detalleEscrituras = $escritura->DetalleEscrituras($codigoEscritura);
+	
 
 	$resultado = $escritura->Listado($numeroProyecto);
-	/*  VALORES PARA LA VISTA DE LAS ESCRITURAS
-	cod_sct = 0
-	num_sct = 1
-	fec_doc = 2
-	cod_sub = 3
-	nom_bie = 4
-	can_fol = 5
-	obs_sct = 6
-	num_fol = 7
-	cod_usu = 8
-	hra_ing = 9
-	proy_id = 10
-	*/
-    	
+		
 	$lista = array();
 
 	while($fila = $resultado->fetch_array())
@@ -200,6 +176,7 @@ $escritura =new EscrituraClassProyecto();
 
         <div class="row">
             <div class="col-md-6">
+                <h2>Revision de Escrituras por PROYECTO - Sistema Actual de ingreso</h2>
                 <span class="etiquetas"><?php echo $lista[$cont];?></span>
             </div>
             <div class="col-md-5">

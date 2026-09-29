@@ -1,64 +1,72 @@
 <?php
+
 class Conexion
 {
-	private $conn;
+    public $conn;
 
-	function __construct()
-	{
-	    $host = "localhost";
+    public function __construct() {
+        $host = "localhost";
         $user = "usuario";
         $pass = "archivo123$";
         $db   = "dbarp";
 
         $this->conn = new mysqli($host, $user, $pass, $db);
 
-        if ($this->conn->connect_error) {
-            echo "Error al contenctar a MySQL: (" . $this->conn->connect_error . ") " . $this->conn->connect_error;
+        if ($this->conn->connect_errno) {
+            echo "Error al contenctar a MySQL: (" . $this->conn->connect_errno . ") " . $this->conn->connect_error;
             exit();
         }
 
-        #echo $this->conn->host_info. " AAA Titicaca";
+        $this->conn->set_charset("utf8mb4");
+        //echo $this->conn->host_info . " KATARI";
         return $this->conn;
-	}
-
-	public function ConsultaSin($sql)
-    {
-        # Sirve para: INSERT, UPDATE, DELETE
-        #echo $sql;
-
-        if(!$this->conn->query($sql)){
-            echo "Error. ".mysqli_error($this->conn);
-            exit();
-        }
-
-        return true;
     }
 
+    /**
+     * Sirve para INSERT, UPDATE, DELETE
+     * @param [type] $sql [description]
+     */
+    public function ConsultaSin($sql)
+    {
+        try {
+            $this->conn->query($sql);
+            $res = TRUE;
+        } catch (Exception $e) {
+            echo 'Excepción: ',  $e->getMessage();
+            $res = FALSE;
+        }
+        return $res;
+        mysqli_close($this->conn);
+    }
+
+    /**
+     * Sirve para SELECT
+     * @param mysqli $sql [description]
+     */
     public function ConsultaCon($sql)
     {
-        # Sirve para: SELECT
-
-        if(!$result = $this->conn->query($sql)){
-            echo "Error: ".mysqli_error($this->conn);
-            return false;
-            exit();
+        try {
+          $result = $this->conn->query($sql);
+        } catch (Exception $e) {
+          echo 'Excepción: ',  $e->getMessage();
         }
-
         return $result;
+        mysqli_close($this->conn);
     }
 
-    public function ConsultaArray($sql)
-    {
-        # Sirve para: SELECT convertido en array
-        #echo $sql;
-
-        if(!$result = $this->conn->query($sql)){
-            echo "Error. ".mysqli_error($this->conn);
-            return false;
+    /**
+     * Sirve para: SELECT convertido en array
+     * @param [type] $sql [description]
+     */
+    public function ConsultaArray($sql) {
+        try {
+            $result = $this->conn->query($sql);
+        } catch (Exception $e) {
+            echo 'Excepción: ',  $e->getMessage();
         }
 
         $data = $result->fetch_array(MYSQLI_ASSOC);
         return $data;
+        mysqli_close($this->conn);
     }
 }
-?>

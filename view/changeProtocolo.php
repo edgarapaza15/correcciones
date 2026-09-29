@@ -1,36 +1,20 @@
 <?php
 session_start();
 
-include_once "../model/EscrituraClass.php";
+require_once "../model/EscrituraClassProtocolo.php";
 
 	// Recoge el numero de protocolo de la session
     $numeroProtocolo = $_SESSION['protocolo'];
     $codigoPersonal = $_SESSION['administrator'];
 
-	// VALORES PARA LA VISTA
-    // cod_sct =0
-    //  cod_not =1
-    //   num_sct =2
-    //   cod_dst =3
-    //   fec_doc =4
-    //   cod_sub =5
-    //   nom_bie =6
-    //   can_fol =7
-    //   cod_pro =8
-    //   obs_sct =9
-    //   num_fol =10
-    //   cod_usu =11
-    //   hra_ing =12
-    //   proy_id =13
-
-    $escritura = new EscrituraClass();
+    $escritura = new EscrituraClassProtocolo();
 		
 	$listadoEscrituras = $escritura->Listado($numeroProtocolo);
 	$lista = array();
 
-	while($fila = $listadoEscrituras->fetch_array())
+	while($fila = $listadoEscrituras->fetch_array(MYSQLI_ASSOC))
 	{
-		$lista[]=$fila[0];
+		$lista[] = $fila['cod_sct'];
 	}
 
 	//Numero total de regsitro del protocolo dentro del array
@@ -44,19 +28,17 @@ include_once "../model/EscrituraClass.php";
 	for($i=0;$i<=count($lista)-1;$i++){
 	   echo $lista[$i]."<br>";
 	}
-	*
 	*/
-	
 
-	$limite= $numeroArray;
+	$limite = $numeroArray;
 
-	@$cont=$_GET['contador'];
+	@$cont = $_GET['contador'];
 
-	if ($cont+1 <= $limite && $cont >= 0 && isset($_GET['contador'])){
-	    if (isset($_GET['mas'])){
+	if ($cont + 1 <= $limite && $cont >= 0 && isset($_GET['contador'])){
+	    if (isset($_GET['mas'])) {
 	        $cont++;
 	    }
-	    if (isset($_GET['menos']) && $cont-1 > 0){
+	    if (isset($_GET['menos']) && $cont-1 > 0) {
 	       $cont--;
 	    }
 	} else {
@@ -64,6 +46,7 @@ include_once "../model/EscrituraClass.php";
 	}
 
 	$valor1 = $escritura->Escrituras($lista[$cont]);
+    //var_dump($valor1);
  ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -132,8 +115,8 @@ include_once "../model/EscrituraClass.php";
         
         <div class="row">
             <div class="col-md-8">
-                
-                <em><?php echo "Registro Actual: ". $valor1[0];?></em>
+                <h2>Revision de Escrituras Primera etapa - PROTOCOLO</h2>
+                <em><?php echo "Registro Actual: ". $valor1['cod_sct'];?></em>
             </div>
             <div class="col-md-4">
                 <p >Numero de Datos:<span class="header-text"><?php echo $numeroArray; ?></span> | Numero de Protocolo: <span class="header-text"><?php echo $numeroProtocolo; ?></span></p>
@@ -154,11 +137,11 @@ include_once "../model/EscrituraClass.php";
             </div>
             <div class="col-md-3">
                 <form action="" method="post" class="form-group">
-                    <input type="hidden" name="codigoEscritura" value="<?php echo $valor1[0];?>" class="form-control" />
+                    <input type="hidden" name="codigoEscritura" value="<?php echo $valor1['cod_sct'];?>" class="form-control" />
                     <table>
                         <tr>
                             <td>Folio:</td>
-                            <td><input type="text" name="numeroFolio" value="<?php echo $valor1[10]; ?>"
+                            <td><input type="text" name="numeroFolio" value="<?php echo $valor1['num_fol']; ?>"
                                     class="form-control" /></td>
                             <td>
                                 <button class="btn btn-primary" type="submit" name="btnFolio" id="btnFolio"><span
@@ -167,7 +150,7 @@ include_once "../model/EscrituraClass.php";
                         </tr>
                         <tr>
                             <td>Escritura:</td>
-                            <td><input type="text" name="numeroEscritura" value="<?php echo $valor1[2];?>"
+                            <td><input type="text" name="numeroEscritura" value="<?php echo $valor1['num_sct'];?>"
                                     class="form-control" /></td>
                             <td>
                                 <button class="btn btn-primary" type="submit" name="btnFolio" id="btnFolio"><span
@@ -176,7 +159,7 @@ include_once "../model/EscrituraClass.php";
                         </tr>
                         <tr>
                             <td>Total Folios:</td>
-                            <td><input type="text" name="cantidadFolios" value="<?php echo $valor1[7];?>"
+                            <td><input type="text" name="cantidadFolios" value="<?php echo $valor1['can_fol'];?>"
                                     class="form-control" /></td>
                             <td>
                                 <button class="btn btn-primary" type="submit" name="btnFolio" id="btnFolio"><span
@@ -185,7 +168,7 @@ include_once "../model/EscrituraClass.php";
                         </tr>
                         <tr>
                             <td>Fecha:</td>
-                            <td><input type="date" name="fechaDocumento" value="<?php echo $valor1[4];?>"
+                            <td><input type="date" name="fechaDocumento" value="<?php echo $valor1['fec_doc'];?>"
                                     class="form-control" /></td>
                             <td>
                                 <button class="btn btn-primary" type="submit" name="btnFolio" id="btnFolio"><span
@@ -202,7 +185,7 @@ include_once "../model/EscrituraClass.php";
                         <td>
                             <?php
 						//echo "Otorgantes -----------------------------------------------------<br>";
-						$dataOtorgantes = $escritura->ListadoOtorgantes($valor1[0]);
+						$dataOtorgantes = $escritura->ListadoOtorgantes($valor1['cod_sct']);
 
 						while($filao = $dataOtorgantes->fetch_array(MYSQLI_ASSOC))
 						{
@@ -230,7 +213,7 @@ include_once "../model/EscrituraClass.php";
                         <td>
                             <?php
 
-					          $dataFavorecidos = $escritura->ListadoFavorecido($valor1[0]);
+					          $dataFavorecidos = $escritura->ListadoFavorecido($valor1['cod_sct']);
 
 					          while($filaf = $dataFavorecidos->fetch_array())
 					          {
@@ -260,7 +243,7 @@ include_once "../model/EscrituraClass.php";
                         <td>
                             <?php
 				            //echo "Otorgantes Juridicos-----------------------------------------------------<br>";
-				          	$dataOtorgantes = $escritura->ListadoOtorgantes($valor1[0]);
+				          	$dataOtorgantes = $escritura->ListadoOtorgantes($valor1['cod_sct']);
 
 				            while($filaoj = $dataOtorgantes->fetch_array())
 				            {
@@ -287,7 +270,7 @@ include_once "../model/EscrituraClass.php";
                         <td>
                             <?php
 				            //echo "Favorecidos Juridicos-----------------------------------------------------<br>";}
-				            $dataFavorecidos = $escritura->ListadoFavorecido($valor1[0]);
+				            $dataFavorecidos = $escritura->ListadoFavorecido($valor1['cod_sct']);
 
 				            while($filaf = $dataFavorecidos->fetch_array())
 				            {
@@ -320,7 +303,7 @@ include_once "../model/EscrituraClass.php";
                 <table>
                     <tr>
                         <td>Nombre de Bien: *</td>
-                        <td><input type="text" name="nombreBien" value="<?php echo $valor1[6];?>" size="100" /></td>
+                        <td><input type="text" name="nombreBien" value="<?php echo $valor1['nom_bie'];?>" size="100" /></td>
                         <td>
                             <button name="boton1" class="btn btn-primary" type="button" onclick="javascript:window.open('AddOtorgante.php?cod_sct=<?php echo $fila['cod_sct'];?>&cod_per=<?php echo $fila['cod_usu'];?>','','width=800, height=500, scrollbars=YES');"> <span class="glyphicon glyphicon-edit"></span></button>
                         </td>
@@ -329,17 +312,17 @@ include_once "../model/EscrituraClass.php";
                         <td>Sub Serie: *</td>
                         <td>
                             <?php 
-                                $subserie = $escritura->VerSubserie($valor1[5]);
+                                $subserie = $escritura->VerSubserie($valor1['cod_sub']);
 								echo $subserie['subserie'];
 							?>
-                            <button name="btnSubSerie" class="btn btn-primary" type="button" onclick="javascript:window.open('CambiarSubserie.php?cod_sct=<?php echo $valor1[0];?>','','width=800, height=500, scrollbars=YES');"> <span class="glyphicon glyphicon-edit"></span> </button>
+                            <button name="btnSubSerie" class="btn btn-primary" type="button" onclick="javascript:window.open('CambiarSubserie.php?cod_sct=<?php echo $valor1['cod_sct'];?>','','width=800, height=500, scrollbars=YES');"> <span class="glyphicon glyphicon-edit"></span> </button>
                         </td>
                     </tr>
                     <tr>
                         <td>Notario</td>
                         <td>
                             <?php 
-							$notario = $escritura->VerNotario($valor1[1]);
+							$notario = $escritura->VerNotario($valor1['cod_not']);
 							echo $notario['notario'];
 							?>
                         </td>
@@ -348,28 +331,28 @@ include_once "../model/EscrituraClass.php";
                         <td>Distrito:</td>
                         <td>
                             <?php
-							$distrito = $escritura->VerDistrito($valor1[3]);
+							$distrito = $escritura->VerDistrito($valor1['cod_dst']);
 							echo $distrito['des_dst'];
 							?>
                         </td>
                     </tr>
                     <tr>
                         <td>Observaciones</td>
-                        <td><?php echo $valor1[9];?></td>
+                        <td><?php echo $valor1['obs_sct'];?></td>
                     </tr>
 
                     <tr>
                         <td>Codigo Trabajador:</td>
                         <td>
                             <?php 
-							$trabajador = $escritura->VerTrabajador($valor1[11]);
+							$trabajador = $escritura->VerTrabajador($valor1['cod_usu']);
 							echo $trabajador['trabajador'];
 							?>
                         </td>
                     </tr>
                     <tr>
                         <td>Hora Ingreso:</td>
-                        <td><?php echo $valor1[12];?></td>
+                        <td><?php echo $valor1['hra_ing'];?></td>
                     </tr>
 
                 </table>

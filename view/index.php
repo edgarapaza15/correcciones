@@ -54,7 +54,7 @@
                     <form action="../controller/protocolos.php" method="post">
                         <div class="formulario">
 
-                            <input type="text" name="protocolo" class="form-control" placeholder="Numero de Protocolo">
+                            <input type="text" name="txtprotocolo" id="txtprotocolo" class="form-control" placeholder="Numero de Protocolo">
                             <br>
                             <button class="btn btn-success" type="submit" name="revisar">Comenzar Revision</button>
                         </div>
