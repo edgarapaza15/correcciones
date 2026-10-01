@@ -10,8 +10,8 @@ if (isset($_REQUEST['revisar'])) {
     $infoProyecto = $ubicarprotocolo->BuscarProyecto($numeroProtocolo);
     $infoProtocolo = $ubicarprotocolo->BuscarProtocolo($numeroProtocolo);
 
-    echo "con proyecto".$infoProyecto['proy_id'];
-    echo "sin proyecto".$infoProtocolo['cod_pro'];
+    //echo "con proyecto".$infoProyecto['proy_id'];
+    //echo "sin proyecto".$infoProtocolo['cod_pro'];
 
     if ($infoProyecto > 0) {
         echo "Redireccionar a Proyecto";
@@ -28,4 +28,5 @@ if (isset($_REQUEST['revisar'])) {
     } else {
         $mensaje1 = "<span class='label alert'>Nada en protocolo</span>";
     }
+    echo " No encontrado.  REGRESA";
 }
