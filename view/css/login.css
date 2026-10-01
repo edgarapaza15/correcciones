@@ -1,0 +1,168 @@
+/* Styles for login view moved from inline <style> */
+/* ===============================
+   RESET BÁSICO
+================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ===============================
+   BODY
+================================= */
+body {
+    height: 100vh;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ===============================
+   TARJETA PRINCIPAL
+================================= */
+.login-card {
+    background: #ffffff;
+    border-radius: 14px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.35);
+    padding: 45px;
+    width: 100%;
+    max-width: 430px;
+    animation: fadeIn 0.6s ease-in-out;
+}
+
+/* Animación suave */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===============================
+   TÍTULO
+================================= */
+.login-title {
+    text-align: center;
+    margin-bottom: 10px;
+    font-weight: 600;
+    color: #2c5364;
+    font-size: 20px;
+}
+
+.login-title i {
+    margin-right: 6px;
+    color: #2c5364;
+}
+
+.system-name {
+    text-align: center;
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 30px;
+}
+
+/* ===============================
+   MENSAJES
+================================= */
+.login-card .alert {
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+/* ===============================
+   FORMULARIO
+================================= */
+label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #444;
+    margin-top: 10px;
+}
+
+/* Inputs con Foundation */
+.input-group {
+    margin-bottom: 18px;
+}
+
+.input-group-label {
+    background: #2c5364;
+    color: #fff;
+    border-radius: 8px 0 0 8px;
+    border: none;
+}
+
+.input-group-field {
+    border-radius: 0 8px 8px 0;
+    border: 1px solid #ddd;
+    transition: all 0.3s ease;
+    font-size: 14px;
+}
+
+/* Focus */
+.input-group-field:focus {
+    border-color: #2c5364;
+    box-shadow: 0 0 6px rgba(44, 83, 100, 0.4);
+}
+
+/* ===============================
+   BOTÓN
+================================= */
+.button-login {
+    background: #2c5364;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+}
+
+.button-login:hover {
+    background: #203a43;
+    transform: translateY(-2px);
+}
+
+/* ===============================
+   LOGO
+================================= */
+.logo {
+    display: block;
+    margin: 25px auto 10px auto;
+    width: 85px;
+    opacity: 0.9;
+    transition: 0.3s;
+}
+
+.logo:hover {
+    opacity: 1;
+    transform: scale(1.05);
+}
+
+/* ===============================
+   FOOTER
+================================= */
+.footer-text {
+    text-align: center;
+    font-size: 12px;
+    color: #aaa;
+    margin-top: 10px;
+}
+
+/* ===============================
+   RESPONSIVE
+================================= */
+@media (max-width: 500px) {
+    .login-card {
+        padding: 30px 25px;
+    }
+
+    .login-title {
+        font-size: 18px;
+    }
+}

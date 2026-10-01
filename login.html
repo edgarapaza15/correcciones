@@ -1,67 +1,102 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta
+            name="viewport"
+            content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+        />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Revision Escrituras</title>
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+            crossorigin="anonymous"
+        />
 
-    <title>Administración del Sitio</title>
+        <!-- Font Awesome -->
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        />
+        <!-- Styles moved to public/css/estilos/login.css -->
+        <link rel="stylesheet" href="./view/css/login.css" />
+    </head>
 
-    <!-- Bootstrap Core CSS -->
-    <link href="view/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="view/css/index.css">
+    <body>
+        <div class="login-card">
+            <h4 class="login-title">
+                <i class="fa-solid fa-person"></i>
+                Sistema de Control de Calidad de Ingreso de Escrituras
+            </h4>
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+            <div class="system-name">Panel de Administración</div>
 
-</head>
-
-<body>
-    <div class="fondonegro"></div>
-    <div class="imagen">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4 col-md-offset-4">
-                    <br><br><br>
-                    <div class="login-panel panel panel-default">
-                        <div class="panel-heading">
-        
-                            <h3 class="panel-title">Por favor Inicio Sesión</h3>
-                            <hr>
-                        </div>
-                        <div class="panel-body">
-                            <form role="form" action="controller/sesiones.php" method="get">
-                                <fieldset>
-                                    <div class="form-group">
-                                        <input class="form-control" placeholder="usuario" name="usuario" type="text" autofocus>
-                                    </div>
-                                    <div class="form-group">
-                                        <input class="form-control" placeholder="Password" name="password" type="password"
-                                            value="">
-                                    </div>
-                                    <div class="checkbox">
-                                        <label>
-                                            <input name="remember" type="checkbox" value="Remember Me">Recuerdame
-                                        </label>
-                                    </div>
-                                    <!-- Change this to a button or input when using this as a form -->
-                                    <input type="submit" class="btn btn-lg btn-primary btn-block" value="Login" />
-        
-                                </fieldset>
-                            </form>
+            <form role="form" action="controller/sesiones.php" method="get">
+                <div class="mb-3">
+                    <label for="email" class="form-label fw-medium"
+                        >Nombre Usuario</label
+                    >
+                    <div class="input-group">
+                        <span class="input-group-text"
+                            ><i class="bi bi-envelope"></i
+                        ></span>
+                        <input
+                            type="text"
+                            name="usuario"
+                            class="form-control"
+                            id="usuario"
+                            placeholder="usuario"
+                            required
+                        />
+                        <div class="invalid-feedback">
+                            Ingresa tu usuario o correo electrónico.
                         </div>
                     </div>
                 </div>
+
+                <div class="mb-3">
+                    <label for="password" class="form-label fw-medium"
+                        >Contraseña</label
+                    >
+                    <div class="input-group">
+                        <span class="input-group-text"
+                            ><i class="bi bi-lock"></i
+                        ></span>
+                        <input
+                            type="password"
+                            class="form-control"
+                            name="password"
+                            id="password"
+                            placeholder="••••••••"
+                            required
+                        />
+                        <button
+                            class="btn btn-outline-primary"
+                            type="submit"
+                            id="togglePasswordBtn"
+                        >
+                            <i class="bi bi-eye" id="toggleIcon"></i>Ingresar
+                        </button>
+                        <div class="invalid-feedback">
+                            Ingresa tu contraseña.
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <div class="grid-x align-center">
+                <small class="copyright">
+                    <span class=""> © KATARI SOFTWARE</span>
+                    Ing. Edgar Apaza Choque, Copyrigth 2026. Inc.</small
+                >
+                <small class="copyright">Todos los derechos reservados.</small>
             </div>
         </div>
-    </div>
-    
-</body>
 
+        <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/js/foundation.min.js"></script>
+    </body>
 </html>

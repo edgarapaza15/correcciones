@@ -1,9 +1,9 @@
 <?php
 session_start();
-	include "../model/ValidacionClass.php";
+	require_once "../model/ValidacionClass.php";
 
-	$user = trim($_REQUEST['usuario']);
-	$pass = trim($_REQUEST['password']);
+	echo $user = trim($_REQUEST['usuario']);
+	echo $pass = trim($_REQUEST['password']);
 
 	$validacion = new Validacion();
 	$data = $validacion->ValidacionCuenta($user,$pass);
